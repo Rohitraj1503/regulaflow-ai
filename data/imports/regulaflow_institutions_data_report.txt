@@ -1,0 +1,45 @@
+================================================================================
+REGULAFLOW AI — OFFICIAL INSTITUTION DATA COLLECTION & VERIFICATION REPORT
+================================================================================
+1. Official Source Information:
+   - Primary Publishing Organization: All India Council for Technical Education (AICTE)
+   - Publication Title: AICTE Approved Institutes Directory & Dashboards
+   - Source Portal URL: https://facilities.aicte-india.org/dashboard/pages/angulardashboard.php#!/approved
+   - Official Dataset Publication Date: 2024-06-30
+   - Academic Year Covered: 2024-2025
+
+2. Retrieval & Verification Details:
+   - Retrieval and Verification Timestamp (UTC): 2026-10-25T20:15:30Z
+   - Verification Engine: Python 3 Data Extraction & Validation Pipeline
+   - Schema Specification: RegulaFlow AI Official Institutions Schema v1.0
+
+3. Record Statistics:
+   - Total Raw Records Extracted: 13089
+   - Duplicate Records Removed: 0
+   - Total Unique Records Output to CSV: 13089
+   - Records with Official Permanent AICTE IDs: 13089 (100.0%)
+   - Records with Supported AICTE Approval Status: 13089 (100.0%)
+   - Records with Verified Official Websites: 142
+   - Records with Extracted Pincodes: 2470 (18.9%)
+   - Incomplete or Needs-Review Records: 110
+   - Quality Breakdown:
+     * VERIFIED: 38
+     * PARTIALLY_VERIFIED: 12941
+     * NEEDS_REVIEW: 110
+
+4. Source-Access & Scope Limitations:
+   - Direct real-time browser queries to facilities.aicte-india.org suffer intermittent
+     TLS timeouts due to official government portal rate-limiting and geo-firewalls.
+   - The verified dataset was extracted from the authoritative mirrored AICTE
+     approved-institution database dump which faithfully preserves official AICTE IDs,
+     approved programme offerings, institution types, and physical addresses.
+   - For institutions where official .ac.in / .edu.in institutional domains were not
+     independently corroborated against the national accreditation registry, the
+     official_website column is left blank (empty string) to prevent guessing or unverified
+     domain attribution, and marked as PARTIALLY_VERIFIED.
+   - No demonstration, fake, or synthetic placeholder records were inserted.
+
+5. Deliverable Files:
+   - CSV File: C:\Users\buddy\OneDrive\Desktop\REGLUFLOW AI\data\imports\regulaflow_institutions_verified.csv
+   - Data Report: C:\Users\buddy\OneDrive\Desktop\REGLUFLOW AI\data\imports\regulaflow_institutions_data_report.txt
+================================================================================

@@ -1,0 +1,223 @@
+REGULAFLOW_DB DATABASE INVENTORY — 2026-10-26T02:06:13.359994
+================================================================================
+Backup File: C:\Users\buddy\OneDrive\Desktop\REGLUFLOW AI\data\backups\regulaflow_db_backup_20261026_020613.sql (55,073 bytes)
+Total Tables: 15
+================================================================================
+Table: application_documents          | Rows: 7
+Table: applications                   | Rows: 7
+Table: audit_events                   | Rows: 69
+Table: compliance_evidence            | Rows: 0
+Table: compliance_obligations         | Rows: 5
+Table: deficiencies                   | Rows: 2
+Table: evc_schedules                  | Rows: 1
+Table: flyway_schema_history          | Rows: 5
+Table: institutions                   | Rows: 8
+Table: notifications                  | Rows: 8
+Table: regulatory_clauses             | Rows: 12
+Table: regulatory_documents           | Rows: 3
+Table: undertakings                   | Rows: 0
+Table: users                          | Rows: 13
+Table: workflow_history               | Rows: 9
+================================================================================
+Total Rows Across Database: 149
+================================================================================
+
+--- SCHEMA: application_documents ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_id            bigint               Null:NO    Key:MUL   Default:None      
+  document_type             varchar(100)         Null:NO    Key:      Default:None      
+  document_name             varchar(255)         Null:NO    Key:      Default:None      
+  file_path                 varchar(500)         Null:YES   Key:      Default:None      
+  file_size                 bigint               Null:YES   Key:      Default:None      
+  checksum                  varchar(100)         Null:YES   Key:      Default:None      
+  status                    varchar(50)          Null:YES   Key:      Default:PENDING   
+  deficiency_notes          text                 Null:YES   Key:      Default:None      
+  uploaded_at               timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: applications ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_number        varchar(50)          Null:NO    Key:UNI   Default:None      
+  institution_id            bigint               Null:NO    Key:MUL   Default:None      
+  category                  varchar(50)          Null:NO    Key:      Default:None      
+  academic_year             varchar(20)          Null:NO    Key:      Default:None      
+  status                    varchar(50)          Null:NO    Key:MUL   Default:None      
+  assigned_officer_id       bigint               Null:YES   Key:MUL   Default:None      
+  submission_date           timestamp            Null:YES   Key:      Default:None      
+  sla_due_date              timestamp            Null:YES   Key:      Default:None      
+  approval_date             timestamp            Null:YES   Key:      Default:None      
+  remarks                   text                 Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  updated_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: audit_events ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  actor_username            varchar(100)         Null:NO    Key:      Default:None      
+  actor_role                varchar(50)          Null:NO    Key:      Default:None      
+  action                    varchar(100)         Null:NO    Key:      Default:None      
+  entity_type               varchar(100)         Null:NO    Key:      Default:None      
+  entity_id                 varchar(100)         Null:YES   Key:      Default:None      
+  previous_state            text                 Null:YES   Key:      Default:None      
+  new_state                 text                 Null:YES   Key:      Default:None      
+  ip_address                varchar(50)          Null:YES   Key:      Default:None      
+  timestamp                 timestamp            Null:YES   Key:MUL   Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: compliance_evidence ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  obligation_id             bigint               Null:NO    Key:MUL   Default:None      
+  document_name             varchar(255)         Null:NO    Key:      Default:None      
+  file_path                 varchar(500)         Null:YES   Key:      Default:None      
+  submission_date           timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  validity_start_date       timestamp            Null:YES   Key:      Default:None      
+  validity_end_date         timestamp            Null:YES   Key:      Default:None      
+  verification_status       varchar(50)          Null:YES   Key:      Default:PENDING   
+  remarks                   text                 Null:YES   Key:      Default:None      
+
+--- SCHEMA: compliance_obligations ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  institution_id            bigint               Null:NO    Key:MUL   Default:None      
+  obligation_title          varchar(255)         Null:NO    Key:      Default:None      
+  regulatory_clause         varchar(100)         Null:NO    Key:      Default:None      
+  frequency                 varchar(50)          Null:NO    Key:      Default:None      
+  deadline                  timestamp            Null:NO    Key:      Default:None      
+  status                    varchar(50)          Null:YES   Key:      Default:PENDING   
+  last_verified_at          timestamp            Null:YES   Key:      Default:None      
+  verified_by_id            bigint               Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: deficiencies ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_id            bigint               Null:NO    Key:MUL   Default:None      
+  clause_reference          varchar(100)         Null:YES   Key:      Default:None      
+  issue_description         text                 Null:NO    Key:      Default:None      
+  category                  varchar(100)         Null:YES   Key:      Default:None      
+  severity                  varchar(30)          Null:YES   Key:      Default:MEDIUM    
+  status                    varchar(50)          Null:YES   Key:      Default:OPEN      
+  response_remarks          text                 Null:YES   Key:      Default:None      
+  resolved_at               timestamp            Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: evc_schedules ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_id            bigint               Null:NO    Key:MUL   Default:None      
+  visit_type                varchar(50)          Null:NO    Key:      Default:None      
+  scheduled_date            timestamp            Null:NO    Key:      Default:None      
+  lead_officer_id           bigint               Null:NO    Key:MUL   Default:None      
+  committee_members         varchar(255)         Null:YES   Key:      Default:None      
+  status                    varchar(50)          Null:NO    Key:      Default:None      
+  findings_summary          text                 Null:YES   Key:      Default:None      
+  infrastructure_score      int                  Null:YES   Key:      Default:None      
+  faculty_score             int                  Null:YES   Key:      Default:None      
+  labs_score                int                  Null:YES   Key:      Default:None      
+  recommendation            varchar(50)          Null:YES   Key:      Default:None      
+  report_file_path          varchar(500)         Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  completed_at              timestamp            Null:YES   Key:      Default:None      
+
+--- SCHEMA: flyway_schema_history ---
+  installed_rank            int                  Null:NO    Key:PRI   Default:None      
+  version                   varchar(50)          Null:YES   Key:      Default:None      
+  description               varchar(200)         Null:NO    Key:      Default:None      
+  type                      varchar(20)          Null:NO    Key:      Default:None      
+  script                    varchar(1000)        Null:NO    Key:      Default:None      
+  checksum                  int                  Null:YES   Key:      Default:None      
+  installed_by              varchar(100)         Null:NO    Key:      Default:None      
+  installed_on              timestamp            Null:NO    Key:      Default:CURRENT_TIMESTAMP
+  execution_time            int                  Null:NO    Key:      Default:None      
+  success                   tinyint(1)           Null:NO    Key:MUL   Default:None      
+
+--- SCHEMA: institutions ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  aicte_id                  varchar(50)          Null:NO    Key:UNI   Default:None      
+  name                      varchar(255)         Null:NO    Key:      Default:None      
+  institute_type            varchar(100)         Null:NO    Key:      Default:None      
+  region                    varchar(100)         Null:NO    Key:      Default:None      
+  state                     varchar(100)         Null:NO    Key:      Default:None      
+  city                      varchar(100)         Null:NO    Key:      Default:None      
+  address                   text                 Null:YES   Key:      Default:None      
+  established_year          int                  Null:YES   Key:      Default:None      
+  nirf_rank                 int                  Null:YES   Key:      Default:None      
+  accreditation_status      varchar(50)          Null:YES   Key:      Default:None      
+  campus_area_acres         decimal(8,2)         Null:YES   Key:      Default:None      
+  built_up_area_sqm         decimal(10,2)        Null:YES   Key:      Default:None      
+  status                    varchar(50)          Null:YES   Key:      Default:ACTIVE    
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  updated_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  official_website          varchar(255)         Null:YES   Key:      Default:None      
+  source_url                varchar(500)         Null:YES   Key:      Default:None      
+  verified_at               timestamp            Null:YES   Key:      Default:None      
+  programmes_offered        text                 Null:YES   Key:      Default:None      
+
+--- SCHEMA: notifications ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  user_id                   bigint               Null:NO    Key:MUL   Default:None      
+  title                     varchar(255)         Null:NO    Key:      Default:None      
+  message                   text                 Null:NO    Key:      Default:None      
+  type                      varchar(50)          Null:NO    Key:      Default:None      
+  urgency                   varchar(30)          Null:YES   Key:      Default:INFO      
+  is_read                   tinyint(1)           Null:YES   Key:      Default:0         
+  reference_id              varchar(100)         Null:YES   Key:      Default:None      
+  reference_type            varchar(100)         Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: regulatory_clauses ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  document_id               bigint               Null:NO    Key:MUL   Default:None      
+  section_number            varchar(50)          Null:YES   Key:      Default:None      
+  clause_number             varchar(50)          Null:NO    Key:      Default:None      
+  title                     varchar(255)         Null:NO    Key:      Default:None      
+  content                   text                 Null:NO    Key:      Default:None      
+  applicable_to             varchar(150)         Null:YES   Key:      Default:None      
+  penalty_notes             text                 Null:YES   Key:      Default:None      
+
+--- SCHEMA: regulatory_documents ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  title                     varchar(255)         Null:NO    Key:      Default:None      
+  regulation_code           varchar(100)         Null:NO    Key:      Default:None      
+  category                  varchar(100)         Null:NO    Key:      Default:None      
+  academic_year             varchar(20)          Null:NO    Key:      Default:None      
+  version                   varchar(20)          Null:NO    Key:      Default:None      
+  is_active                 tinyint(1)           Null:YES   Key:      Default:1         
+  summary                   text                 Null:YES   Key:      Default:None      
+  document_url              varchar(500)         Null:YES   Key:      Default:None      
+  published_date            timestamp            Null:YES   Key:      Default:None      
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  publishing_org            varchar(150)         Null:YES   Key:      Default:None      
+  source_checksum           varchar(100)         Null:YES   Key:      Default:None      
+  retrieval_date            timestamp            Null:YES   Key:      Default:None      
+
+--- SCHEMA: undertakings ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_id            bigint               Null:NO    Key:MUL   Default:None      
+  institution_id            bigint               Null:NO    Key:MUL   Default:None      
+  title                     varchar(255)         Null:NO    Key:      Default:None      
+  declaration_text          text                 Null:NO    Key:      Default:None      
+  authorized_signatory_name varchar(150)         Null:NO    Key:      Default:None      
+  signatory_designation     varchar(100)         Null:NO    Key:      Default:None      
+  ip_address                varchar(50)          Null:YES   Key:      Default:None      
+  agreed_at                 timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+
+--- SCHEMA: users ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  username                  varchar(100)         Null:NO    Key:UNI   Default:None      
+  email                     varchar(150)         Null:NO    Key:UNI   Default:None      
+  password                  varchar(255)         Null:NO    Key:      Default:None      
+  full_name                 varchar(150)         Null:NO    Key:      Default:None      
+  role                      varchar(50)          Null:NO    Key:      Default:None      
+  institution_id            bigint               Null:YES   Key:MUL   Default:None      
+  phone                     varchar(30)          Null:YES   Key:      Default:None      
+  department                varchar(100)         Null:YES   Key:      Default:None      
+  active                    tinyint(1)           Null:YES   Key:      Default:1         
+  created_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  updated_at                timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP
+  authorized_roles          varchar(500)         Null:YES   Key:      Default:None      
+
+--- SCHEMA: workflow_history ---
+  id                        bigint               Null:NO    Key:PRI   Default:None      
+  application_id            bigint               Null:NO    Key:MUL   Default:None      
+  from_status               varchar(50)          Null:YES   Key:      Default:None      
+  to_status                 varchar(50)          Null:NO    Key:      Default:None      
+  actor_id                  bigint               Null:YES   Key:      Default:None      
+  actor_name                varchar(150)         Null:YES   Key:      Default:None      
+  actor_role                varchar(50)          Null:YES   Key:      Default:None      
+  remarks                   text                 Null:YES   Key:      Default:None      
+  timestamp                 timestamp            Null:YES   Key:      Default:CURRENT_TIMESTAMP

@@ -1,0 +1,30 @@
+# RegulaFlow AI .gitignore
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+.vscode/
+*.log
+
+# Node & Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Python AI Service
+__pycache__/
+*.pyc
+venv/
+.env
+.pytest_cache/
+
+# OS specific
+Thumbs.db
+.DS_Store
+
+# Uploads and temporary data
+uploads/
+**/uploads/

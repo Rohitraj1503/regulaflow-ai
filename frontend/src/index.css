@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #08090B;
+    color: #F5F5F5;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom minimal smoky glass scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08090B;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(185, 245, 107, 0.4);
+}
+
+/* Glassmorphism core utility classes matching reference image */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+.glass-card {
+  background: rgba(17, 18, 21, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 36px 0 rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(23, 25, 30, 0.75);
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: 0 20px 42px 0 rgba(0, 0, 0, 0.55), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+  color: #F5F5F5;
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.26), 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Lime active button / indicator */
+.btn-lime {
+  background: #B9F56B;
+  color: #08090B;
+  font-weight: 600;
+  box-shadow: 0 0 22px rgba(185, 245, 107, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-lime:hover {
+  background: #A5EA54;
+  box-shadow: 0 0 28px rgba(185, 245, 107, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Glass input */
+.glass-input {
+  background: rgba(17, 18, 21, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #F5F5F5;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  border-color: rgba(185, 245, 107, 0.7);
+  box-shadow: 0 0 14px rgba(185, 245, 107, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+/* Ambient smoky blur background orbs */
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+/* Backward compatibility aliases */
+.glass-panel {
+  background: rgba(17, 18, 21, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.glass-panel-glow {
+  background: rgba(17, 18, 21, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(185, 245, 107, 0.35);
+  box-shadow: 0 0 28px rgba(185, 245, 107, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Dark role select & dropdown styling matching glassmorphism theme */
+.role-select {
+  background-color: #1A1B1F;
+  color: #F5F5F5;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color-scheme: dark;
+  padding: 5px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.role-select:hover {
+  background-color: #292C30;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: #B9F56B;
+  box-shadow: 0 0 0 2px rgba(185, 245, 107, 0.2);
+}
+
+.role-select option {
+  background-color: #1A1B1F;
+  color: #F5F5F5;
+  padding: 6px 10px;
+}
+
+.role-select option:checked {
+  background-color: #B9F56B;
+  color: #08090B;
+}
+
+.role-select option:hover {
+  background-color: #292C30;
+  color: #F5F5F5;
+}
